@@ -1,0 +1,54 @@
+What is libjpeg_HW:
+-------------------
+"libjpeg" is a software JPEG codec library provided by IJG (http://www.ijg.org/).
+"libjpeg_HW" is ported from "libjpeg" and added hardware acceleration feature.
+
+Change history:
+---------------
+2014.07.10
+1. Update to IJG version 9a.
+2. Implement IJG's source manager.
+3. Implement IJG's destination manager.
+4. Deprecated nuvoTon API: NvtJpeg_GetRealWidthRealHeightYUVFormat(), use IJG API: jpeg_calc_output_dimensions() instead.
+5. Add source from memory for decoding sample.
+6. Add destination to memory for encoding sample.
+
+Version history:
+----------------
+1. Ported from official release jpegsrc.v8c.tar.gz 2011.01.16
+2. Ported from official release jpegsrc.v9.tar.gz  2013.01.13
+3. Ported from official release jpegsrc.v9a.tar.gz 2014.01.19
+
+How to run:
+-----------
+Note: There are two functions "Encode then Decode" and "Decode Only":
+
+1. Encode then Decode: ( decoder default disable down-scale )
+Usage:  ./ijg_jpeg_demo arg1 arg2 arg3 arg4 arg5
+Options:
+argv1:  output JPEG filename, like "my_jpeg.jpg" or others
+argv2:  compress quality, like "75", 0 (worst) ~ 100 (best)
+argv3:  input raw filename, like "for_hw_yuv422_480x272.bin" or others
+argv4:  input raw width, like "480" or others
+argv5:  input raw height, like "272" or others
+
+
+2. Decode Only:
+Usage:  ./ijg_jpeg_demo arg1 arg2
+Option:
+argv1:  input JPEG filename, like "my_jpeg.jpg" or others
+argv2:	enable scale down or not, like "1": enable, "0": disable
+
+Test Pattern:
+-------------
+1. /decode_pattern
+Normal.jpg				--> For Hardware and Software Decoder
+NoHuffmanTable.jpg		--> For Hardware Decoder Only
+Progressive.jpg			--> For Auto Switch to Software Decoder ( if hardware decode is failed )
+Normal_640x480.jpg		--> For Hardware and Software Decoder
+Normal_1000x1000.jpg	--> For Hardware and Software Decoder
+
+2. /encode_pattern
+for_hw_yuv422_480x272.bin	--> Hardware Encoder Pattern
+for_hw_yuv422_500x500.bin	--> Hardware Encoder Pattern
+for_hw_yuv422_640x480.bin	--> Hardware Encoder Pattern

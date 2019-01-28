@@ -1,0 +1,4 @@
+usage:
+    ./transform -m 1        Enable MMU mode.
+    ./transform -m 0        Disable MMU mode, which requires devmem driver (fa92_devmem) installed first to allocate physical memory.
+    ./transform             Default to MMU mode.

@@ -1,0 +1,123 @@
+Configuration in menuconfig
+=====================
+ Device Drivers  ---> 
+  [*] USB support  ---> 
+      <*>   USB Gadget Support  --->  
+  ¢x ¢x                        < >     MIDI Gadget (EXPERIMENTAL)                                                             ¢x ¢x  
+  ¢x ¢x                        <M>     Printer Gadget                                                                         ¢x ¢x  
+  ¢x ¢x                        < >     CDC Composite Device (Ethernet and ACM)                                                ¢x ¢x  
+  ¢x ¢x                        < >     Multifunction Composite Gadget (EXPERIMENTAL)                                          ¢x ¢x  
+  ¢x ¢x                        < >     HID Gadget                                             
+
+
+HOWTO USE THIS DRIVER
+=====================
+
+To load the printer gadget driver.
+
+insmod g_printer
+
+insmod g_printer
+
+
+The follow command line parameter can be used when loading the printer gadget
+(ex: insmod g_printer idVendor=0x0525 idProduct=0xa4a8 ):
+
+idVendor - This is the Vendor ID used in the device descriptor. The default is
+	the Netchip vendor id 0x0525. YOU MUST CHANGE TO YOUR OWN VENDOR ID
+	BEFORE RELEASING A PRODUCT. If you plan to release a product and don't
+	already have a Vendor ID please see www.usb.org for details on how to
+	get one.
+
+idProduct - This is the Product ID used in the device descriptor. The default
+	is 0xa4a8, you should change this to an ID that's not used by any of
+	your other USB products if you have any. It would be a good idea to
+	start numbering your products starting with say 0x0001.
+
+bcdDevice - This is the version number of your product. It would be a good idea
+	to put your firmware version here.
+
+iManufacturer - A string containing the name of the Vendor.
+
+iProduct - A string containing the Product Name.
+
+iSerialNum - A string containing the Serial Number. This should be changed for
+	each unit of your product.
+
+iPNPstring -  The PNP ID string used for this printer. You will want to set
+	either on the command line or hard code the PNP ID string used for
+	your printer product.
+
+qlen - The number of 8k buffers to use per endpoint. The default is 10, you
+	should tune this for your product. You may also want to tune the
+	size of each buffer for your product.
+
+
+HOWTO INSTALL WINDOWS DRIVER
+=====================
+
+1.Add Printer
+2.Choose a printer port - USB001 (Virtual printer port for USB)
+3.Install the printer driver
+  Manufacturer - Generic
+  Printer - Generic / Test Only
+  
+
+USING THE EXAMPLE CODE
+======================
+
+This example code talks to stdout, instead of a print engine.
+
+To read printer data from the host to stdout:
+
+	# gprinter_demo -read_data
+
+
+To write printer data from a file (data_file) to the host:
+
+	# cat data_file | gprinter_demo -write_data
+
+
+To get the current printer status for the gadget driver:
+
+	# gprinter_demo -get_status
+
+	Printer status is:
+	     Printer is NOT Selected
+	     Paper is Out
+	     Printer OK
+
+
+To set printer to Selected/On-line:
+
+	# gprinter_demo -selected
+
+
+To set printer to Not Selected/Off-line:
+
+	# gprinter_demo -not_selected
+
+
+To set paper status to paper out:
+
+	# gprinter_demo -paper_out
+
+
+To set paper status to paper loaded:
+
+	# gprinter_demo -paper_loaded
+
+
+To set error status to printer OK:
+
+	# gprinter_demo -no_error
+
+
+To set error status to ERROR:
+
+	# gprinter_demo -error
+
+
+
+
+

@@ -1,0 +1,4 @@
+usage:
+    ./sprite -m 1           Enable MMU mode.
+    ./sprite -m 0           Disable MMU mode, which requires devmem driver (fa92_devmem) installed first to allocate physical memory.
+    ./sprite                Default to MMU mode.

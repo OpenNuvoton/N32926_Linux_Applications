@@ -1,0 +1,11 @@
+1. please make sure kernel supports ROMFS filesystem
+2. extract compressed file lib_xxx.tar.gz
+   2.1 please note that type "echo $PATH" to check the first toolchain path comes from "arm_linux_4.2" or "arm_linux_4.8"
+   2.2 for arm_linux_4.2, type "tar zxf lib_*_4.2.1.tar.gz"
+   2.3 for arm_linux_4.8, type "tar zxf lib_*_4.8.4.tar.gz"
+3. copy necessary shared object and soft link files to "lib" folder
+4. run gen_lib.sh to generate "lib_romfs.bin" romfs image
+5. copy the romfs image to /mnt/nand1-1
+6. in file initramfs/etc/profile, it will mount lib_romfs.bin to /lib 
+   if detects file /mnt/nand1-1/lib_romfs.bin
+
