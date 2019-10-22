@@ -58,7 +58,8 @@ typedef enum
 	eIMAGE_WQVGA,
 	eIMAGE_VGA,
 	eIMAGE_SVGA,
-	eIMAGE_HD720
+	eIMAGE_HD720,
+        eIMAGE_FULLHD
 }E_IMAGE_RESOL;
 
 #endif

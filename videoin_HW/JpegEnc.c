@@ -142,6 +142,9 @@ JpegEncFromVIN(E_IMAGE_RESOL eEncodeImgResol,
 	}else if(eEncodeImgResol == eIMAGE_HD720){
 		u32Width = 1280;
 		u32Height = 720;
+        }else if(eEncodeImgResol == eIMAGE_FULLHD){
+		u32Width = 1920;
+		u32Height = 1072;
 	}else{
 		u32Width = 320;				
 		u32Height = 240;				
@@ -306,6 +309,9 @@ JpegEncFromVIN_Packet(E_IMAGE_RESOL eEncodeImgResol,
 	}else if(eEncodeImgResol == eIMAGE_HD720){
 		u32Width = 1280;
 		u32Height = 720;
+        }else if(eEncodeImgResol == eIMAGE_FULLHD){
+		u32Width = 1920;
+		u32Height = 1072;
 	}else{
 		u32Width = 320;				
 		u32Height = 240;				
@@ -451,6 +457,9 @@ JpegEncFromVIN_Planar(E_IMAGE_RESOL eEncodeImgResol,
 	}else if(eEncodeImgResol == eIMAGE_HD720){
 		u32Width = 1280;
 		u32Height = 720;
+        }else if(eEncodeImgResol == eIMAGE_FULLHD){
+		u32Width = 1920;
+		u32Height = 1072;
 	}else{
 		u32Width = 320;				
 		u32Height = 240;				

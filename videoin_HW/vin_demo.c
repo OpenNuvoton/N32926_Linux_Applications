@@ -423,6 +423,9 @@ CaptureImage_Planar(E_IMAGE_RESOL eEncodeImgResol,
 	}else if(eEncodeImgResol == eIMAGE_HD720){
 		u32EncodeImgWidth = 1280;
 		u32EncodeImgHeight = 720;
+	}else if(eEncodeImgResol == eIMAGE_FULLHD){
+		u32EncodeImgWidth = 1920;
+		u32EncodeImgHeight = 1072;
 	}
 
 #if 0	
@@ -572,6 +575,10 @@ int main(int argc, char **argv)
 				else if(strcasecmp(optarg, "hd720") == 0){
 					ePreviewImgResol = eIMAGE_HD720;
 				}
+                                else if(strcasecmp(optarg, "fullhd") == 0){
+					ePreviewImgResol = eIMAGE_HD720;
+				}
+                           
 			}
 			break;
 			case 'e':
@@ -591,6 +598,9 @@ int main(int argc, char **argv)
 				else if(strcasecmp(optarg, "hd720") == 0){
 					eEncodeImgResol = eIMAGE_HD720;
 				}
+                                else if(strcasecmp(optarg, "fullhd") == 0){
+					eEncodeImgResol = eIMAGE_FULLHD;
+				} 
 			}
 			break;
 			case 'p':
@@ -630,6 +640,10 @@ int main(int argc, char **argv)
 		u32PreviewImgWidth = 1280;
 		u32PreviewImgHeight = 720;
 	}
+	else if(ePreviewImgResol == eIMAGE_FULLHD){
+		u32PreviewImgWidth = 1920;
+		u32PreviewImgHeight = 1072;
+	}
 
 	if(eEncodeImgResol == eIMAGE_QVGA){
 		u32EncodeImgWidth = 320;
@@ -646,6 +660,9 @@ int main(int argc, char **argv)
 	}else if(eEncodeImgResol == eIMAGE_HD720){
 		u32EncodeImgWidth = 1280;
 		u32EncodeImgHeight = 720;
+	}else if(eEncodeImgResol == eIMAGE_FULLHD){
+		u32EncodeImgWidth = 1920;
+		u32EncodeImgHeight = 1072;
 	}
 
 	if(s_sJpegEncFeat.eJpegEncThbSupp){
