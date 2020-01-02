@@ -48,10 +48,11 @@ enum {
 
 static unsigned long act_buff_size = 0;
 
-static uint8_t buff_plain_orig[AES_TESTDATA_SIZE];	// plain data
-static uint8_t buff_aes_sw_encdec[AES_TESTDATA_SIZE];
-static uint8_t buff_aes_cryptodev_encrypt[AES_TESTDATA_SIZE];
-static uint8_t buff_aes_cryptodev_decrypt[AES_TESTDATA_SIZE];
+/* Need to be cache line aligned because these buffers can access by both CPU and AES */
+static uint8_t buff_plain_orig[AES_TESTDATA_SIZE] __attribute__ ((__aligned__(32)));	// plain data
+static uint8_t buff_aes_sw_encdec[AES_TESTDATA_SIZE] __attribute__ ((__aligned__(32)));
+static uint8_t buff_aes_cryptodev_encrypt[AES_TESTDATA_SIZE] __attribute__ ((__aligned__(32)));
+static uint8_t buff_aes_cryptodev_decrypt[AES_TESTDATA_SIZE] __attribute__ ((__aligned__(32)));
 
 static uint8_t key[AES_MAX_KEY_SIZE];
 static uint8_t iv[AES_IV_SIZE];

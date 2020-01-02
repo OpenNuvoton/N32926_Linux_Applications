@@ -299,8 +299,9 @@ static void myExitHandler (int sig)
 }
 int main()
 {
+    int err;
 	unsigned int select = 0;
-	char *p8SrcBuf;
+	void *p8SrcBuf;
 
 	signal (SIGINT, myExitHandler);
 	//signal (SIGQUIT, myExitHandler);
@@ -318,14 +319,14 @@ int main()
 	if ( InitVPE() ){				
 		exit(-1);
 	}	
-	p8SrcBuf = malloc(SRCBUFSIZE);	
-	if(p8SrcBuf == NULL){
-		printf("Allocate src buffer faile \n");
-		exit(-1);
-	}
+	err = posix_memalign(&p8SrcBuf, 32, SRCBUFSIZE);
+    if (err) {
+        printf("posix_memalign failed: %s\n", strerror(err));
+        exit(EXIT_FAILURE);
+    }
 	
 
-	printf("Allocate Buf addr = 0x%x\n", (unsigned int)p8SrcBuf);
+	printf("Allocate buffer address = 0x%x\n", (unsigned int)p8SrcBuf);
 	memset (p8SrcBuf, 0x00, SRCBUFSIZE);
 	
 	loadSrcPattern(p8SrcBuf);

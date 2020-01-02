@@ -141,7 +141,8 @@ void gfx_prepsrcpat(void *pat, unsigned long w, unsigned long h, unsigned long s
     
     if (gfxctx.mmu) {
         gfxctx.srcbuf_size = gfxctx.srcbuf_stride * gfxctx.srcbuf_height;
-        int err = posix_memalign(&gfxctx.srcbuf_va, 4, gfxctx.srcbuf_size);
+        /* Need to be cache line aligned because this buffer can access by both CPU and BLT */
+        int err = posix_memalign(&gfxctx.srcbuf_va, 32, gfxctx.srcbuf_size);
         if (err) {
             printf("posix_memalign failed: %s\n", strerror(err));
             exit(EXIT_FAILURE);
