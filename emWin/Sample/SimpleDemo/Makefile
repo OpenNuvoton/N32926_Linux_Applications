@@ -3,7 +3,7 @@
 CC=arm-linux-gcc
 LINK=$(CC)
 STRIP=arm-linux-strip
-CFLAGS=-MD -O2
+CFLAGS=-MD -O2 -D__GUI_NUMBYTES__=4194304
 LDFLAGS=-L../../Lib -lNUemWin -lm -L./tslib -lts -ldl -pthread -static
 
 APPDIR=.

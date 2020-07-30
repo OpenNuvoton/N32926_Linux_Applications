@@ -1,2 +1,9 @@
+Please note that Nuvoton emWin lib is for N9H26 only.
+
 (1). Go To the subfolder Sample/GUIDemo to type in the command "make" to run Makefile, build one binary file GUIDemo.
 (2). Go to the subfolder Sample/SimpleDemo to type in the command "make" to run Makefile, build one binary file SimpleDemo.
+(3). Please to get the latest Linux BSP from OpenNuvoton https://github.com/OpenNuvoton/N32926_Linux_BSP.
+(4). Limitation: Linux emWin touch doesn't support LCD orientation.
+(5). How to adjust emWin pool memory size?
+     (5-1). In GUIDemo/Application/GUIConf.c. "#define GUI_NUMBYTES  0x1000   //0x20000", unit is byte.
+     (5-2). In SimpleDemo/Makefile. "__GUI_NUMBYTES__=4194304", unit is byte.
