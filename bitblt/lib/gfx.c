@@ -44,6 +44,7 @@ void gfx_setup(int mmu)
     gfxctx.fb_va = MAP_FAILED;
     gfxctx.bltfd = -1;
     gfxctx.mmu = mmu;
+    gfxctx.srcfmt_premulalpha = 0;
     gfxctx.devmemfd = -1;
     gfxctx.srcbuf_size = 0;
     gfxctx.srcbuf_pa = -1;
@@ -173,6 +174,9 @@ void gfx_prepsrcpat(void *pat, unsigned long w, unsigned long h, unsigned long s
     
     gfxctx.tfm.srcFormat = pixfmt;
     gfxctx.tfm.flags = alpha ? eDRVBLT_HASTRANSPARENCY : 0;
+    
+    /* Most source images are non-premultiplied alpha when applying alpha */
+    gfxctx.srcfmt_premulalpha = 0;
 }
 
 /**
@@ -231,6 +235,18 @@ void gfx_clear(S_DRVBLT_ARGB8 *color, S_DRVBLT_RECT *bbox)
         exit(EXIT_FAILURE);
     }
 
+    if (gfxctx.srcfmt_premulalpha) {
+        if ((ioctl(gfxctx.bltfd, BLT_SRCFMT_PREMULALPHA, NULL)) == -1) {
+            printf("ioctl BLT_SRCFMT_PREMULALPHA failed: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        if ((ioctl(gfxctx.bltfd, BLT_SRCFMT_NONPREMULALPHA, NULL)) == -1) {
+            printf("ioctl BLT_SRCFMT_NONPREMULALPHA failed: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+    }
+    
     if ((ioctl(gfxctx.bltfd, BLT_TRIGGER, NULL)) == -1) {
         printf("ioctl BLT_TRIGGER failed: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
@@ -323,6 +339,18 @@ void gfx_scale(float ox, float oy, float sx, float sy, S_DRVBLT_RECT *bbox)
         exit(EXIT_FAILURE);
     }
 
+    if (gfxctx.srcfmt_premulalpha) {
+        if ((ioctl(gfxctx.bltfd, BLT_SRCFMT_PREMULALPHA, NULL)) == -1) {
+            printf("ioctl BLT_SRCFMT_PREMULALPHA failed: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        if ((ioctl(gfxctx.bltfd, BLT_SRCFMT_NONPREMULALPHA, NULL)) == -1) {
+            printf("ioctl BLT_SRCFMT_NONPREMULALPHA failed: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+    }
+
     if ((ioctl(gfxctx.bltfd, BLT_TRIGGER, NULL)) == -1) {
         printf("ioctl BLT_TRIGGER failed: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
@@ -412,6 +440,18 @@ void gfx_rotate(float ox, float oy, float deg, S_DRVBLT_RECT *bbox)
         exit(EXIT_FAILURE);
     }
 
+    if (gfxctx.srcfmt_premulalpha) {
+        if ((ioctl(gfxctx.bltfd, BLT_SRCFMT_PREMULALPHA, NULL)) == -1) {
+            printf("ioctl BLT_SRCFMT_PREMULALPHA failed: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        if ((ioctl(gfxctx.bltfd, BLT_SRCFMT_NONPREMULALPHA, NULL)) == -1) {
+            printf("ioctl BLT_SRCFMT_NONPREMULALPHA failed: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+    }
+
     if ((ioctl(gfxctx.bltfd, BLT_TRIGGER, NULL)) == -1) {
         printf("ioctl BLT_TRIGGER failed: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
@@ -471,6 +511,18 @@ void gfx_alpha(float ox, float oy, float alpha, S_DRVBLT_RECT *bbox)
     if ((ioctl(gfxctx.bltfd, BLT_SET_BLIT, &gfxctx.blitop)) == -1) {
         printf("ioctl BLT_SET_BLIT failed: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
+    }
+
+    if (gfxctx.srcfmt_premulalpha) {
+        if ((ioctl(gfxctx.bltfd, BLT_SRCFMT_PREMULALPHA, NULL)) == -1) {
+            printf("ioctl BLT_SRCFMT_PREMULALPHA failed: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        if ((ioctl(gfxctx.bltfd, BLT_SRCFMT_NONPREMULALPHA, NULL)) == -1) {
+            printf("ioctl BLT_SRCFMT_NONPREMULALPHA failed: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
     }
 
     if ((ioctl(gfxctx.bltfd, BLT_TRIGGER, NULL)) == -1) {
@@ -559,6 +611,18 @@ void gfx_horizflip(float ox, float oy, S_DRVBLT_RECT *bbox)
         exit(EXIT_FAILURE);
     }
 
+    if (gfxctx.srcfmt_premulalpha) {
+        if ((ioctl(gfxctx.bltfd, BLT_SRCFMT_PREMULALPHA, NULL)) == -1) {
+            printf("ioctl BLT_SRCFMT_PREMULALPHA failed: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        if ((ioctl(gfxctx.bltfd, BLT_SRCFMT_NONPREMULALPHA, NULL)) == -1) {
+            printf("ioctl BLT_SRCFMT_NONPREMULALPHA failed: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+    }
+
     if ((ioctl(gfxctx.bltfd, BLT_TRIGGER, NULL)) == -1) {
         printf("ioctl BLT_TRIGGER failed: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
@@ -645,6 +709,18 @@ void gfx_vertflip(float ox, float oy, S_DRVBLT_RECT *bbox)
         exit(EXIT_FAILURE);
     }
 
+    if (gfxctx.srcfmt_premulalpha) {
+        if ((ioctl(gfxctx.bltfd, BLT_SRCFMT_PREMULALPHA, NULL)) == -1) {
+            printf("ioctl BLT_SRCFMT_PREMULALPHA failed: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        if ((ioctl(gfxctx.bltfd, BLT_SRCFMT_NONPREMULALPHA, NULL)) == -1) {
+            printf("ioctl BLT_SRCFMT_NONPREMULALPHA failed: %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+    }
+    
     if ((ioctl(gfxctx.bltfd, BLT_TRIGGER, NULL)) == -1) {
         printf("ioctl BLT_TRIGGER failed: %s\n", strerror(errno));
         exit(EXIT_FAILURE);

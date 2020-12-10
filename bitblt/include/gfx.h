@@ -26,6 +26,7 @@ struct GfxCtx {
     S_DRVBLT_BLIT_OP	            blitop;
     S_DRVBLT_BLIT_TRANSFORMATION	tfm;
     S_DRVBLT_FILL_OP				fillop;
+    int                             srcfmt_premulalpha;
     
     /* Valid if mmu off*/
     int                         devmemfd;
