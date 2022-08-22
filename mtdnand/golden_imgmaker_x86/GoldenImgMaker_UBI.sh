@@ -34,7 +34,7 @@
 #				-P "./mtdnand_ubi_nand1.img -t 0 -O 0x1080000 -S 0x1000000 -e 0x0 -j 1" 
 
 
-if ./Src/GoldenImgMaker -O ../golden_imgmaker_x86/golden_ubi -t ../golden_imgmaker_x86/TurboWriter.ini -p 2048 -o 64 -s 64 -b 1024 \
+if ./Src/GoldenImgMaker -O ../golden_imgmaker_x86/golden_ubi -t ../golden_imgmaker_x86/TurboWriter_U6DN.ini -p 2048 -o 64 -s 64 -b 1024 \
                         -P "../golden_imgmaker_x86/N32926_NANDLoader_240MHz_Fast_Logo.bin -t 3 -b 4 -O 0 -S 0x80000 -e 0x900000" \
 			-P "../golden_imgmaker_x86/NuvotonLogo_320x240.bin -t 4 -b 8 -O 0xF00000 -S 0x100000 -e 0x500000" \
                         -P "../../../image/conprog.bin -t 1 -b 8 -O 0x80000 -S 0x1000000" \
