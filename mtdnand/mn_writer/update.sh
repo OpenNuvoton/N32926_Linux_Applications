@@ -38,8 +38,8 @@ if ! cat /tmp/execute.info | grep EXECUTE; then
 fi
 
 
-echo "./mn_writer -x $PATH_SYSIMG -f ./NANDWRITER.ini -t ./TurboWriter.ini -b $BLOCKSIZE -p $PAGESIZE -o $OOBSIZE"
-if ./mn_writer -x $PATH_SYSIMG -f ./NANDWRITER.ini -t ./TurboWriter.ini -b $BLOCKSIZE -p $PAGESIZE -o $OOBSIZE; then
+echo "./mn_writer -x $PATH_SYSIMG -f ./NANDWRITER.ini -t ./TurboWriter_U6DN.ini -b $BLOCKSIZE -p $PAGESIZE -o $OOBSIZE"
+if ./mn_writer -x $PATH_SYSIMG -f ./NANDWRITER.ini -t ./TurboWriter_U6DN.ini -b $BLOCKSIZE -p $PAGESIZE -o $OOBSIZE; then
 	echo "Success!!"
 else
 	echo "Failed on writing images"
