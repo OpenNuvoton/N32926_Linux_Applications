@@ -1,3 +1,9 @@
+20220822 Update:
+
+TurboWriter_U6DN: The new file is new part number.
+TurboWriter_U3DN: The new file is older part number.
+
+
 The mn_writer will re-burn SYSTEM and EXECUTE partitions.
 Please run './update.sh' to start
 
