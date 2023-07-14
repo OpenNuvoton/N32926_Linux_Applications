@@ -156,9 +156,9 @@ int main()
 //	ioctl(fd,LCD_ENABLE_INT);
 	uVideoSize = var.xres * var.yres * var.bits_per_pixel / 8;
 	
-printf("uVideoSize = 0x%x\n", uVideoSize);
-printf("var.xres = 0x%x\n", var.xres);
-printf("var.yres = 0x%x\n", var.yres);	
+	printf("uVideoSize = 0x%x\n", uVideoSize);
+	printf("var.xres = 0x%x\n", var.xres);
+	printf("var.yres = 0x%x\n", var.yres);	
 	//	printf("uVideoSize = 0x%x \n", uVideoSize);
 	pVideoBuffer = mmap(NULL, uVideoSize, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
 	
@@ -180,6 +180,8 @@ printf("var.yres = 0x%x\n", var.yres);
 		fpVideoImg = fopen("720x480.dat", "r");	
 	else if (uVideoSize == 800*480*2)
 		fpVideoImg = fopen("800x480.dat", "r");	
+	else if (uVideoSize == 1024*600*2)
+		fpVideoImg = fopen("1024x600.dat", "r");	
 	
 
 	 if(fpVideoImg == NULL)
